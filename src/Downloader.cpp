@@ -171,11 +171,13 @@ void Downloader::finished()
                    m_downloadDir.filePath (m_fileName));
 
     /* Notify application */
-    emit downloadFinished (m_url, m_downloadDir.filePath (m_fileName));
+    emit downloadFinished (m_url, m_downloadDir.filePath (m_fileName), m_reply->error(), m_reply->errorString());
 
     /* Install the update */
     m_reply->close();
-    installUpdate();
+    if(!stopInstall){
+        installUpdate();
+    }
     setVisible (false);
 }
 
@@ -292,8 +294,8 @@ void Downloader::cancelDownload()
  */
 void Downloader::saveFile (qint64 received, qint64 total)
 {
-    Q_UNUSED (received);
-    Q_UNUSED (total);
+    Q_UNUSED (received)
+    Q_UNUSED (total)
 
     /* Check if we need to redirect */
     QUrl url = m_reply->attribute (
@@ -354,7 +356,7 @@ void Downloader::updateProgress (qint64 received, qint64 total)
     if (total > 0) {
         m_ui->progressBar->setMinimum (0);
         m_ui->progressBar->setMaximum (100);
-        m_ui->progressBar->setValue ((received * 100) / total);
+        m_ui->progressBar->setValue (static_cast<int>((received * 100) / total));
 
         calculateSizes (received, total);
         calculateTimeRemaining (received, total);
@@ -419,6 +421,11 @@ void Downloader::calculateTimeRemaining (qint64 received, qint64 total)
 
         m_ui->timeLabel->setText (tr ("Time remaining") + ": " + timeString);
     }
+}
+
+void Downloader::setStopInstall(bool value)
+{
+    stopInstall = value;
 }
 
 /**

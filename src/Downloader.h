@@ -33,6 +33,7 @@
 
 #include <QDir>
 #include <QDialog>
+#include <QNetworkReply>
 #include <ui_Downloader.h>
 
 namespace Ui {
@@ -50,7 +51,7 @@ class Downloader : public QWidget
     Q_OBJECT
 
 signals:
-    void downloadFinished (const QString& url, const QString& filepath);
+    void downloadFinished (const QString& url, const QString& filepath, QNetworkReply::NetworkError error, QString errorString);
 
 public:
     explicit Downloader (QWidget* parent = 0);
@@ -60,6 +61,8 @@ public:
 
     QString downloadDir() const;
     void setDownloadDir (const QString& downloadDir);
+
+    void setStopInstall(bool value);
 
 public slots:
     void setUrlId (const QString& url);
@@ -80,6 +83,7 @@ private slots:
     void calculateTimeRemaining (qint64 received, qint64 total);
 
 private:
+    bool stopInstall = false;
     qreal round (const qreal& input);
 
 private:
