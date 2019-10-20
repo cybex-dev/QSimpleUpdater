@@ -115,7 +115,7 @@ void Downloader::startDownload (const QUrl& url)
     m_ui->progressBar->setValue (0);
     m_ui->stopButton->setText (tr ("Stop"));
     m_ui->downloadLabel->setText (tr ("Downloading updates"));
-    m_ui->timeLabel->setText (tr ("Time remaining") + ": " + tr ("unknown"));
+//    m_ui->timeLabel->setText (tr ("Time remaining") + ": " + tr ("unknown"));
 
     /* Configure the network request */
     QNetworkRequest request (url);
@@ -216,8 +216,8 @@ void Downloader::installUpdate()
     /* Update labels */
     m_ui->stopButton->setText    (tr ("Close"));
     m_ui->downloadLabel->setText (tr ("Download complete!"));
-    m_ui->timeLabel->setText     (tr ("The installer will open separately")
-                                  + "...");
+//    m_ui->timeLabel->setText     (tr ("The installer will open separately")
+//                                  + "...");
 
     /* Ask the user to install the download */
     QMessageBox box;
@@ -249,8 +249,8 @@ void Downloader::installUpdate()
 
         m_ui->openButton->setEnabled (true);
         m_ui->openButton->setVisible (true);
-        m_ui->timeLabel->setText (tr ("Click the \"Open\" button to "
-                                      "apply the update"));
+//        m_ui->timeLabel->setText (tr ("Click the \"Open\" button to "
+//                                      "apply the update"));
     }
 }
 
@@ -368,9 +368,9 @@ void Downloader::updateProgress (qint64 received, qint64 total)
         m_ui->progressBar->setMaximum (0);
         m_ui->progressBar->setValue (-1);
         m_ui->downloadLabel->setText (tr ("Downloading Updates") + "...");
-        m_ui->timeLabel->setText (QString ("%1: %2")
-                                  .arg (tr ("Time Remaining"))
-                                  .arg (tr ("Unknown")));
+//        m_ui->timeLabel->setText (QString ("%1: %2")
+//                                  .arg (tr ("Time Remaining"))
+//                                  .arg (tr ("Unknown")));
     }
 }
 
@@ -419,7 +419,7 @@ void Downloader::calculateTimeRemaining (qint64 received, qint64 total)
                 timeString = tr ("1 second");
         }
 
-        m_ui->timeLabel->setText (tr ("Time remaining") + ": " + timeString);
+//        m_ui->timeLabel->setText (tr ("Time remaining") + ": " + timeString);
     }
 }
 

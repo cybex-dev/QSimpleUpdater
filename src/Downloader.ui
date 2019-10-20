@@ -87,7 +87,7 @@
             </font>
            </property>
            <property name="text">
-            <string>Downloading updates</string>
+            <string>Downloading update</string>
            </property>
           </widget>
          </item>
@@ -104,13 +104,6 @@
            </property>
            <property name="invertedAppearance">
             <bool>false</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="timeLabel">
-           <property name="text">
-            <string>Time remaining: 0 minutes</string>
            </property>
           </widget>
          </item>
