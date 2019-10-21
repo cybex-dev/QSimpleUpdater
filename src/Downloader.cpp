@@ -171,7 +171,9 @@ void Downloader::finished()
                    m_downloadDir.filePath (m_fileName));
 
     /* Notify application */
-    emit downloadFinished (m_url, m_downloadDir.filePath (m_fileName), m_reply->error(), m_reply->errorString());
+    if(!downloadCancelled) {
+        emit downloadFinished (m_url, m_downloadDir.filePath (m_fileName), m_reply->error(), m_reply->errorString());
+    }
 
     /* Install the update */
     m_reply->close();
@@ -260,6 +262,8 @@ void Downloader::installUpdate()
  */
 void Downloader::cancelDownload()
 {
+    this->downloadCancelled = true;
+    this->stopInstall = true;
     if (!m_reply->isFinished()) {
         QMessageBox box;
         box.setWindowTitle (tr ("Updater"));
