@@ -83,6 +83,7 @@ private slots:
     void calculateTimeRemaining (qint64 received, qint64 total);
 
 private:
+    bool downloadCancelled = false;
     bool stopInstall = false;
     qreal round (const qreal& input);
 
